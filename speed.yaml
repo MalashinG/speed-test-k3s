@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: my-speed
+  name: my-speed
+spec:
+  replicas: 2
+  strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: my-speed
+  template:
+    metadata:
+      labels:
+        app: my-speed
+    spec:
+      containers:
+      - image: palpy/speed-test_v2
+        name: speed-test
+        volumeMounts:
+        - name: servers-json
+          mountPath: /servers.json
+          subPath: servers.json
+        ports:
+        - containerPort: 8080
+      volumes:
+      - name: servers-json
+        configMap:
+          name: servers-new
