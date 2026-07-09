@@ -22,12 +22,12 @@ spec:
       - image: palpy/speed-test_v2
         name: speed-test
         volumeMounts:
-        - name: servers-json
+        - name: servers
           mountPath: /servers.json
           subPath: servers.json
         ports:
         - containerPort: 8080
       volumes:
-      - name: servers-json
+      - name: servers
         configMap:
-          name: servers-new
+          name: servers
