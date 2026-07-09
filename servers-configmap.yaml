@@ -1,0 +1,22 @@
+apiVersion: v1
+data:
+  servers.json: "\n[\n\t{\n\t\t\"name\": \"Speedtest Demo Server (Helsinki)\",\n\t\t\"server\"
+    :\"//speedtest.ic.uz.ua/\",\n\t\t\"dlURL\" :\"/backend/garbage.php\",\n\t\t\"ulURL\"
+    :\"/backend/empty.php\",\n\t\t\"pingURL\" :\"/backend/empty.php\",\n\t\t\"getIpURL\"
+    :\"/backend/getIP.php\"\n\t},\n\t{\n\t\t\"name\": \"Amsterdam, Netherlands\",\n\t\t\"server\":
+    \"http://spd-nlsrv.hostkey.com/\",\n\t\t\"id\": 1,\n\t\t\"dlURL\": \"garbage\",\n\t\t\"ulURL\":
+    \"empty\",\n\t\t\"pingURL\": \"empty\",\n\t\t\"getIpURL\": \"getIP\"\n\t},\n\t{\n\t\t\"name\":
+    \"Helsinki, Finland\",\n\t\t\"server\": \"http://spd-fisrv.hostkey.com/\",\n\t\t\"id\":
+    2,\n\t\t\"dlURL\": \"garbage\",\n\t\t\"ulURL\": \"empty\",\n\t\t\"pingURL\": \"empty\",\n\t\t\"getIpURL\":
+    \"getIP\"\n\t},\n\t{\n\t\t\"name\": \"NewYork, USA\",\n\t\t\"server\": \"http://spd-uswb.hostkey.com/\",\n\t\t\"id\":
+    3,\n\t\t\"dlURL\": \"garbage\",\n\t\t\"ulURL\": \"empty\",\n\t\t\"pingURL\": \"empty\",\n\t\t\"getIpURL\":
+    \"getIP\"\n\t},\n\t{\n\t\t\"name\": \"Frankfurt, Germany\",\n\t\t\"server\": \"http://spd-desrv.hostkey.com/\",\n\t\t\"id\":
+    4,\n\t\t\"dlURL\": \"garbage\",\n\t\t\"ulURL\": \"empty\",\n\t\t\"pingURL\": \"empty\",\n\t\t\"getIpURL\":
+    \"getIP\"\n\t},\n\t{\n\t\t\"name\": \"Reykjavik, Iceland\",\n\t\t\"server\": \"http://spd-icsrv.hostkey.com/\",\n\t\t\"id\":
+    5,\n\t\t\"dlURL\": \"garbage\",\n\t\t\"ulURL\": \"empty\",\n\t\t\"pingURL\": \"empty\",\n\t\t\"getIpURL\":
+    \"getIP\"\n\t},\n\t{\n\t\t\"name\": \"Türkiy, Istanbul\",\n\t\t\"server\": \"http://spd-tr.hostkey.com/\",\n\t\t\"id\":
+    6,\n\t\t\"dlURL\": \"garbage\",\n\t\t\"ulURL\": \"empty\",\n\t\t\"pingURL\": \"empty\",\n\t\t\"getIpURL\":
+    \"getIP\"\n\t}\n]\n"
+kind: ConfigMap
+metadata:
+  name: servers
