@@ -1,0 +1,41 @@
+---
+- hosts: "yandex-cloud"
+  tasks:
+
+    - name: k3s check install
+      ansible.builtin.stat:
+        path: /usr/local/bin/k3s
+      register: k3s_installed
+
+    - name: install k3s
+      ansible.builtin.shell: |
+        curl -sfL https://get.k3s.io | sh -
+      when: not k3s_installed.stat.exists
+
+    - name: mkdir ~/.kube/config
+      ansible.builtin.file:
+        path: ~/.kube
+        state: directory
+        mode: '0775'
+    
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: /etc/rancher/k3s/k3s.yaml
+        dest: "{{ ansible_env.HOME }}/.kube/config"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: '0644'
+        remote_src: true
+      become: true
+
+
+    - name: git clone
+      ansible.builtin.git:
+        repo: 'https://github.com/MalashinG/speed-test-k3s.git'
+        dest: "{{ ansible_env.HOME }}/speed-test-k3s"
+        
+    - name: apply manifest
+      ansible.builtin.shell: |
+        kubectl apply -f "{{ ansible_env.HOME }}"/speed-test-k3s/speed.yaml -f "{{ ansible_env.HOME }}"/speed-test-k3s/service.yaml -f "{{ ansible_env.HOME }}"/speed-test-k3s/servers-configmap.yaml
+      environment:
+        KUBECONFIG: "{{ ansible_env.HOME }}/.kube/config"
