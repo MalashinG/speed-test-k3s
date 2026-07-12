@@ -25,6 +25,17 @@ resource "yandex_vpc_subnet" "network-subnet" {
 }
 
 
+variable "user_name" {
+  type        = string
+  description = "Username for the VPS"
+}
+
+
+variable "ssh_key" {
+  type        = string
+  description = "SSH public key for the VPS"
+}
+
 resource "yandex_compute_instance" "linux-vm" {
   name = "terraform-vm"
   zone = "ru-central1-a"
@@ -47,12 +58,15 @@ resource "yandex_compute_instance" "linux-vm" {
     subnet_id = yandex_vpc_subnet.network-subnet.id
     nat       = true
   }
-
   metadata = {
-    user-data = "${file("${path.module}/meta.txt")}"
+    user-data = templatefile("${path.module}/meta.tpl", {
+      user_name = var.user_name
+      ssh_key  = var.ssh_key
+    })
   }
-  
+
 }
+
 resource "local_file" "ansible_inventory" {
   content = templatefile("${path.module}/inventory.tpl", {
     vps_ip = yandex_compute_instance.linux-vm.network_interface.0.nat_ip_address
