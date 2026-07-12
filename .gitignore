@@ -1,5 +1,10 @@
 host.ini
+.terraform
 export_token.sh
 .terraform
 authorized_key.json
 terraform.tfstate.backup
+terraform.tfstate
+terraform.tfvars
+.terraform.lock.hcl
+meta.txt
