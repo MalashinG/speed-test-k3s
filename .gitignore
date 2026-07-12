@@ -8,3 +8,4 @@ terraform.tfstate
 terraform.tfvars
 .terraform.lock.hcl
 meta.txt
+.terraform.tfstate.lock.info
